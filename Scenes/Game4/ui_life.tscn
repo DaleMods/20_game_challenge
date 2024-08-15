@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dj06b4kdwqmd0"]
+
+[ext_resource type="Texture2D" uid="uid://ws6ig04hqkow" path="res://Assets/Sprites/Game4/Nairan - Bomber - Base.png" id="1_wl53b"]
+
+[node name="UILife" type="TextureRect"]
+texture = ExtResource("1_wl53b")

@@ -1,0 +1,164 @@
+[gd_scene load_steps=19 format=3 uid="uid://b1cx1f4yqkx7d"]
+
+[ext_resource type="Script" path="res://Scripts/Game3/player.gd" id="1_jlenf"]
+[ext_resource type="Texture2D" uid="uid://b5gk278qu8fc7" path="res://Assets/Sprites/Game3/TBM/1.png" id="1_ud05c"]
+[ext_resource type="Texture2D" uid="uid://cg2bhyw36iyr4" path="res://Assets/Sprites/Game3/TBM/2.png" id="2_ga8yh"]
+[ext_resource type="Texture2D" uid="uid://ksfvtu7ixit0" path="res://Assets/Sprites/Game3/TBM/3.png" id="3_ysqrw"]
+[ext_resource type="Texture2D" uid="uid://b0gwd20q15lmb" path="res://Assets/Sprites/Game3/flame.png" id="5_p7fhw"]
+[ext_resource type="Texture2D" uid="uid://dechlo54r813w" path="res://Assets/Sprites/Game3/smoke.png" id="6_8iebf"]
+[ext_resource type="AudioStream" uid="uid://ep7e57a2m17m" path="res://Assets/Sounds/Game3/Refuel.wav" id="7_rnwue"]
+[ext_resource type="AudioStream" uid="uid://chrphvt6g6kn3" path="res://Assets/Sounds/Game3/shot.wav" id="8_p3amt"]
+[ext_resource type="AudioStream" uid="uid://u1u6jlpclqsv" path="res://Assets/Sounds/Game3/torpedo.wav" id="9_m47df"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5cqpk"]
+radius = 42.0476
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1gic6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ud05c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ga8yh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ysqrw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fmird"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_av0ol"]
+bg_color = Color(0, 1, 0, 1)
+
+[sub_resource type="Curve" id="Curve_ltsmf"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.243339, 190.173), 0.0, 0.0, 0, 0, Vector2(0.497336, -3.07825), 0.0, 0.0, 0, 0, Vector2(0.761989, 178.461), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Curve" id="Curve_iia1a"]
+_data = [Vector2(0.0550622, 0.417101), 0.0, -0.743622, 0, 0, Vector2(0.50444, 0.446924), -2.65703, -2.65703, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_fsevi"]
+offsets = PackedFloat32Array(0, 0.1587, 0.3174, 0.539197, 0.703633, 0.848948, 1)
+colors = PackedColorArray(1, 1, 0.694118, 1, 0.946486, 0.868654, 0.612919, 1, 0.88, 0.705467, 0.132, 1, 0.89, 0.42987, 0.0534, 1, 0.840074, 0.352681, 0.111968, 1, 0.786582, 0.269978, 0.17472, 1, 1, 1, 1, 0)
+
+[sub_resource type="Curve" id="Curve_3rfb7"]
+_data = [Vector2(0, 0.00229418), 0.0, 0.0, 0, 0, Vector2(1, 0.00458837), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_3din5"]
+_data = [Vector2(0, 0.0239834), 0.0, 0.0, 0, 0, Vector2(1, 0.867153), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Player" type="CharacterBody2D"]
+z_index = 10
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_jlenf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_5cqpk")
+
+[node name="Flying" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_1gic6")
+autoplay = "default"
+
+[node name="Health" type="ProgressBar" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_top = 60.0
+offset_right = 100.0
+offset_bottom = 75.0
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_fmird")
+theme_override_styles/fill = SubResource("StyleBoxFlat_av0ol")
+show_percentage = false
+
+[node name="Fuel" type="ProgressBar" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_top = 80.0
+offset_right = 100.0
+offset_bottom = 95.0
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_fmird")
+theme_override_styles/fill = SubResource("StyleBoxFlat_av0ol")
+show_percentage = false
+
+[node name="Fire" type="CPUParticles2D" parent="."]
+modulate = Color(1, 1, 1, 0.129412)
+emitting = false
+amount = 5000
+lifetime = 0.6
+speed_scale = 0.4
+randomness = 1.0
+draw_order = 1
+texture = ExtResource("5_p7fhw")
+emission_shape = 1
+emission_sphere_radius = 32.0
+direction = Vector2(0, -1)
+spread = 0.0
+angular_velocity_min = -45.0
+angular_velocity_max = 45.0
+angular_velocity_curve = SubResource("Curve_ltsmf")
+scale_amount_min = 0.0
+scale_amount_max = 0.2
+scale_amount_curve = SubResource("Curve_iia1a")
+color_ramp = SubResource("Gradient_fsevi")
+
+[node name="Smoke" type="CPUParticles2D" parent="."]
+modulate = Color(1, 1, 1, 0.00784314)
+position = Vector2(0, 150)
+emitting = false
+amount = 1000
+lifetime = 3.0
+speed_scale = 0.3
+randomness = 1.0
+lifetime_randomness = 0.5
+texture = ExtResource("6_8iebf")
+emission_shape = 2
+emission_sphere_radius = 23.0
+gravity = Vector2(0, 100)
+orbit_velocity_min = -0.2
+orbit_velocity_curve = SubResource("Curve_3rfb7")
+scale_amount_min = 0.0
+scale_amount_max = 0.3
+scale_amount_curve = SubResource("Curve_3din5")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -156.0
+offset_top = 56.0
+offset_right = -104.0
+offset_bottom = 79.0
+theme_override_font_sizes/font_size = 16
+text = "Health"
+horizontal_alignment = 2
+
+[node name="Label2" type="Label" parent="."]
+offset_left = -150.0
+offset_top = 74.0
+offset_right = -105.0
+offset_bottom = 97.0
+theme_override_font_sizes/font_size = 16
+text = "Fuel"
+horizontal_alignment = 2
+
+[node name="Refuel" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_rnwue")
+
+[node name="Shoot" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_p3amt")
+
+[node name="Torpedo" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_m47df")

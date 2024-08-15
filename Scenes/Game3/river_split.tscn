@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://boaahks3h5dj1"]
+
+[ext_resource type="Script" path="res://Scripts/Game3/river_split.gd" id="1_wiw22"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u6xpg"]
+size = Vector2(100, 1200)
+
+[node name="RiverStraight" type="Node2D"]
+script = ExtResource("1_wiw22")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_mask = 3
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D"]
+offset_top = -1200.0
+offset_right = 100.0
+color = Color(0, 1, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(50, -600)
+shape = SubResource("RectangleShape2D_u6xpg")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(700, 0)
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D2"]
+offset_top = -1200.0
+offset_right = 100.0
+color = Color(0, 1, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(50, -600)
+shape = SubResource("RectangleShape2D_u6xpg")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2(400, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D3"]
+color = Color(0, 1, 0, 1)
+polygon = PackedVector2Array(0, 0, 50, -150, 50, -1050, 0, -1200, -50, -1050, -50, -150)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D3"]
+polygon = PackedVector2Array(0, 0, 50, -150, 50, -1050, 0, -1200, -50, -1050, -50, -150)

@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8yesyaq8iw4b"]
+
+[ext_resource type="Script" path="res://Scripts/Game5/fruit.gd" id="1_aaura"]
+[ext_resource type="Texture2D" uid="uid://c6glnjjmw3dgo" path="res://Assets/Sprites/Game5/fruit.png" id="1_ok2x8"]
+[ext_resource type="AudioStream" uid="uid://ccnx2wjyw85" path="res://Assets/Sounds/Game5/pacman_eatfruit.wav" id="3_u6gxx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_my745"]
+
+[node name="Fruit" type="Area2D"]
+script = ExtResource("1_aaura")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_ok2x8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_my745")
+
+[node name="chomp" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_u6gxx")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

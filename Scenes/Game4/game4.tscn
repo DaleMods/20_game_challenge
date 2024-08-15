@@ -1,0 +1,270 @@
+[gd_scene load_steps=16 format=3 uid="uid://drwq7s030ywjl"]
+
+[ext_resource type="PackedScene" uid="uid://dlqxucorucay3" path="res://Scenes/Game4/player.tscn" id="1_8yy6j"]
+[ext_resource type="Script" path="res://Scripts/Game4/game4.gd" id="1_hujsk"]
+[ext_resource type="Script" path="res://Scripts/Game4/UI.gd" id="2_hdngd"]
+[ext_resource type="PackedScene" uid="uid://boalubd5n26s3" path="res://Scenes/Game4/asteroid.tscn" id="3_ak4n2"]
+[ext_resource type="Script" path="res://Scripts/Game4/PlayerSpawnArea.gd" id="5_go4gc"]
+[ext_resource type="AudioStream" uid="uid://ch6v41km2hmpx" path="res://Assets/Sounds/Game4/rock.wav" id="6_1h0dt"]
+[ext_resource type="AudioStream" uid="uid://cmek2r8gbd31o" path="res://Assets/Sounds/Game4/music.mp3" id="7_3tbx8"]
+[ext_resource type="AudioStream" uid="uid://cirtnkws4cdxd" path="res://Assets/Sounds/Game4/explode.wav" id="8_d6n5f"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s8go8"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 300, 1)
+spread = 0.0
+initial_velocity_min = -10.0
+initial_velocity_max = -10.0
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_prp13"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 300, 1)
+spread = 0.0
+initial_velocity_min = -20.0
+initial_velocity_max = -20.0
+gravity = Vector3(0, 0, 0)
+scale_min = 3.0
+scale_max = 3.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tppev"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 300, 1)
+spread = 0.0
+initial_velocity_min = -30.0
+initial_velocity_max = -30.0
+gravity = Vector3(0, 0, 0)
+scale_min = 5.0
+scale_max = 5.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_o8k54"]
+font_size = 24
+font_color = Color(1, 0.423529, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_fspbn"]
+font_size = 24
+font_color = Color(1, 0.423529, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_sj844"]
+font_size = 36
+font_color = Color(1, 0.423529, 0, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_56fwo"]
+radius = 100.0
+
+[node name="Game4" type="Node2D"]
+script = ExtResource("1_hujsk")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -150
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 800.0
+offset_bottom = 600.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="BackgroundStarFields" type="Node2D" parent="."]
+
+[node name="StarFieldBack" type="GPUParticles2D" parent="BackgroundStarFields"]
+z_index = -100
+position = Vector2(830, 300)
+amount = 200
+process_material = SubResource("ParticleProcessMaterial_s8go8")
+lifetime = 100.0
+preprocess = 280.0
+
+[node name="StarFieldMiddle" type="GPUParticles2D" parent="BackgroundStarFields"]
+z_index = -95
+position = Vector2(830, 300)
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_prp13")
+lifetime = 100.0
+preprocess = 280.0
+
+[node name="StarFieldFront" type="GPUParticles2D" parent="BackgroundStarFields"]
+z_index = -90
+position = Vector2(830, 300)
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_tppev")
+lifetime = 100.0
+preprocess = 280.0
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 800.0
+offset_bottom = 600.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_hdngd")
+
+[node name="Score" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 15.0
+offset_right = 159.0
+offset_bottom = 49.0
+text = "SCORE: 9999"
+label_settings = SubResource("LabelSettings_o8k54")
+
+[node name="Level" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 45.0
+offset_right = 123.0
+offset_bottom = 79.0
+text = "LEVEL: 99"
+label_settings = SubResource("LabelSettings_fspbn")
+
+[node name="Teleport" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 75.0
+offset_right = 123.0
+offset_bottom = 109.0
+text = "TELEPORT: OFF"
+label_settings = SubResource("LabelSettings_fspbn")
+
+[node name="Lives" type="HBoxContainer" parent="UI"]
+layout_mode = 0
+offset_top = 95.0
+offset_right = 200.0
+offset_bottom = 159.0
+theme_override_constants/separation = -30
+
+[node name="GameOver" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.5
+offset_top = -11.5
+offset_right = 48.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.423529, 0, 1)
+theme_override_font_sizes/font_size = 36
+text = "GAME OVER!
+
+
+
+"
+horizontal_alignment = 1
+
+[node name="SpaceToStart" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -198.0
+offset_top = -25.0
+offset_right = 198.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.423529, 0, 1)
+theme_override_font_sizes/font_size = 36
+text = "PRESS SPACE TO START
+PRESS 'I' FOR INSTRUCTIONS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Waiting" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -38.5
+offset_top = -11.5
+offset_right = 38.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+text = "Waiting...."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Instructions" type="Label" parent="UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "INSTRUCTIONS:
+W - Thrust
+A - Rotate left
+D - Rotate right
+Z - Teleport (when available)
+SPACE - Shoot"
+label_settings = SubResource("LabelSettings_sj844")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Player" parent="." instance=ExtResource("1_8yy6j")]
+visible = false
+position = Vector2(400, 300)
+
+[node name="Rockets" type="Node" parent="."]
+
+[node name="Asteroids" type="Node" parent="."]
+
+[node name="Asteroid" parent="Asteroids" instance=ExtResource("3_ak4n2")]
+position = Vector2(279, 426)
+
+[node name="Asteroid2" parent="Asteroids" instance=ExtResource("3_ak4n2")]
+position = Vector2(581, 378)
+
+[node name="Asteroid3" parent="Asteroids" instance=ExtResource("3_ak4n2")]
+position = Vector2(629, 147)
+
+[node name="Asteroid4" parent="Asteroids" instance=ExtResource("3_ak4n2")]
+position = Vector2(158, 136)
+
+[node name="Aliens" type="Node" parent="."]
+
+[node name="SpawnPoint" type="Node2D" parent="."]
+position = Vector2(400, 300)
+
+[node name="PlayerSpawnArea" type="Area2D" parent="."]
+position = Vector2(400, 300)
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("5_go4gc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSpawnArea"]
+shape = SubResource("CircleShape2D_56fwo")
+
+[node name="RockSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_1h0dt")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_3tbx8")
+volume_db = -15.0
+autoplay = true
+
+[node name="AlienExplode" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_d6n5f")

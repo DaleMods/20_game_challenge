@@ -1,0 +1,129 @@
+[gd_scene load_steps=7 format=3 uid="uid://d1y1o8sbuxpwq"]
+
+[ext_resource type="Script" path="res://Scripts/Game3/game3.gd" id="1_17m4m"]
+[ext_resource type="PackedScene" uid="uid://b1cx1f4yqkx7d" path="res://Scenes/Game3/player.tscn" id="1_vt3fo"]
+[ext_resource type="Script" path="res://Scripts/Game3/EnemySpawner.gd" id="3_mdihm"]
+[ext_resource type="Script" path="res://Scripts/Game3/RiverSpawner.gd" id="4_8gvc2"]
+[ext_resource type="Script" path="res://Scripts/Game3/RefuelSpawner.gd" id="5_a1egm"]
+[ext_resource type="AudioStream" uid="uid://dodvixxmsw13d" path="res://Assets/Sounds/Game3/MusicTrack.mp3" id="6_cudl3"]
+
+[node name="Game3" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_17m4m")
+
+[node name="Player" parent="." instance=ExtResource("1_vt3fo")]
+position = Vector2(400, 500)
+
+[node name="EnemySpawner1" type="Marker2D" parent="." node_paths=PackedStringArray("river_spawner")]
+position = Vector2(400, -100)
+script = ExtResource("3_mdihm")
+river_spawner = NodePath("../RiverSpawner")
+
+[node name="RiverSpawner" type="Marker2D" parent="."]
+position = Vector2(0, -1200)
+script = ExtResource("4_8gvc2")
+
+[node name="RefuelSpawner" type="Marker2D" parent="." node_paths=PackedStringArray("river_spawner")]
+position = Vector2(400, -100)
+script = ExtResource("5_a1egm")
+river_spawner = NodePath("../RiverSpawner")
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="World"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 800.0
+offset_bottom = 600.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.00378972, 0, 0.723968, 1)
+
+[node name="Enemies" type="Node2D" parent="World"]
+
+[node name="InstructionsLabel" type="Label" parent="."]
+visible = false
+z_index = 1
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 100.0
+offset_bottom = 245.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 24
+text = "<-- and --> Arrows: Move plane left or right
+SPACE - Shoot machine guns at planes
+Z - Shoot torpedo at ships
+Fly over FUEL to refuel your plane"
+horizontal_alignment = 1
+
+[node name="GameOverLabel" type="Label" parent="."]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 36
+text = "
+
+
+GAME OVER!
+ "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PressSpaceLabel" type="Label" parent="."]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 36
+text = " 
+
+
+
+PRESS SPACE TO BEGIN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="."]
+z_index = 1
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 101.0
+offset_bottom = 44.0
+theme_override_colors/font_color = Color(1, 0.415686, 0, 1)
+theme_override_font_sizes/font_size = 36
+text = "Score: 0"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_cudl3")
+volume_db = -10.0
+autoplay = true
+
+[node name="Info" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -205.0
+offset_top = 13.0
+offset_right = -14.0
+offset_bottom = 62.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 24
+text = "I for Instructions"
+
+[connection signal="game_ended" from="Player" to="." method="_on_player_game_ended"]

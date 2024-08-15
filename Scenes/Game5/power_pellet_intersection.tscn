@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://hdshakhrxr7y"]
+
+[ext_resource type="Script" path="res://Scripts/Game5/power_pellet_intersection.gd" id="1_3l7qf"]
+[ext_resource type="Texture2D" uid="uid://d0mkfwwbisla5" path="res://Assets/Sprites/Game5/power_pellet.png" id="2_rh0g0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6m714"]
+size = Vector2(3, 3)
+
+[node name="PowerPellet_Intersection" type="Area2D"]
+z_index = -5
+scale = Vector2(2, 2)
+collision_layer = 4
+script = ExtResource("1_3l7qf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_rh0g0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_6m714")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

@@ -1,0 +1,129 @@
+[gd_scene load_steps=17 format=3 uid="uid://cbf86v4t2jtq0"]
+
+[ext_resource type="Script" path="res://Scripts/Game3/BF109.gd" id="1_2bkbp"]
+[ext_resource type="Texture2D" uid="uid://c2kvqevqgknry" path="res://Assets/Sprites/Game3/BF109/1.png" id="2_7yutk"]
+[ext_resource type="Texture2D" uid="uid://cyxq5udlb6i1k" path="res://Assets/Sprites/Game3/BF109/2.png" id="3_pwd3v"]
+[ext_resource type="Texture2D" uid="uid://gyfgb0gssjst" path="res://Assets/Sprites/Game3/BF109/3.png" id="4_p7ufy"]
+[ext_resource type="Texture2D" uid="uid://b0gwd20q15lmb" path="res://Assets/Sprites/Game3/flame.png" id="5_yl7c6"]
+[ext_resource type="Texture2D" uid="uid://dechlo54r813w" path="res://Assets/Sprites/Game3/smoke.png" id="6_y7rn5"]
+[ext_resource type="AudioStream" uid="uid://4444lrp42i00" path="res://Assets/Sounds/Game3/bf109.wav" id="7_c0y5o"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6w3q7"]
+radius = 100.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_on7qh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_7yutk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_pwd3v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_p7ufy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0hxil"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wrlj8"]
+bg_color = Color(0, 1, 0, 1)
+
+[sub_resource type="Curve" id="Curve_wfyac"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.243339, 190.173), 0.0, 0.0, 0, 0, Vector2(0.497336, -3.07825), 0.0, 0.0, 0, 0, Vector2(0.761989, 178.461), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Curve" id="Curve_l10r6"]
+_data = [Vector2(0.0550622, 0.417101), 0.0, -0.743622, 0, 0, Vector2(0.50444, 0.446924), -2.65703, -2.65703, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_35kuy"]
+offsets = PackedFloat32Array(0, 0.1587, 0.3174, 0.539197, 0.703633, 0.848948, 1)
+colors = PackedColorArray(1, 1, 0.694118, 1, 0.946486, 0.868654, 0.612919, 1, 0.88, 0.705467, 0.132, 1, 0.89, 0.42987, 0.0534, 1, 0.840074, 0.352681, 0.111968, 1, 0.786582, 0.269978, 0.17472, 1, 1, 1, 1, 0)
+
+[sub_resource type="Curve" id="Curve_2f2x0"]
+_data = [Vector2(0, 0.00229418), 0.0, 0.0, 0, 0, Vector2(1, 0.00458837), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_fk25l"]
+_data = [Vector2(0, 0.0239834), 0.0, 0.0, 0, 0, Vector2(1, 0.867153), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="BF109" type="CharacterBody2D"]
+z_index = 5
+scale = Vector2(0.5, 0.5)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_2bkbp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_6w3q7")
+
+[node name="Flying" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_on7qh")
+autoplay = "default"
+flip_v = true
+
+[node name="Health" type="ProgressBar" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = -73.0
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_0hxil")
+theme_override_styles/fill = SubResource("StyleBoxFlat_wrlj8")
+
+[node name="Fire" type="CPUParticles2D" parent="."]
+modulate = Color(1, 1, 1, 0.129412)
+emitting = false
+amount = 5000
+lifetime = 0.6
+speed_scale = 0.4
+randomness = 1.0
+draw_order = 1
+texture = ExtResource("5_yl7c6")
+emission_shape = 1
+emission_sphere_radius = 32.0
+direction = Vector2(0, -1)
+spread = 0.0
+gravity = Vector2(0, -980)
+angular_velocity_min = -45.0
+angular_velocity_max = 45.0
+angular_velocity_curve = SubResource("Curve_wfyac")
+scale_amount_min = 0.0
+scale_amount_max = 0.2
+scale_amount_curve = SubResource("Curve_l10r6")
+color_ramp = SubResource("Gradient_35kuy")
+
+[node name="Smoke" type="CPUParticles2D" parent="."]
+modulate = Color(1, 1, 1, 0.00784314)
+position = Vector2(0, -150)
+emitting = false
+amount = 1000
+lifetime = 3.0
+speed_scale = 0.3
+randomness = 1.0
+lifetime_randomness = 0.5
+texture = ExtResource("6_y7rn5")
+emission_shape = 2
+emission_sphere_radius = 23.0
+gravity = Vector2(0, -100)
+orbit_velocity_min = -0.2
+orbit_velocity_curve = SubResource("Curve_2f2x0")
+scale_amount_min = 0.0
+scale_amount_max = 0.3
+scale_amount_curve = SubResource("Curve_fk25l")
+
+[node name="Dive" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_c0y5o")
+autoplay = true

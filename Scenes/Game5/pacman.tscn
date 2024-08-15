@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnrn4po6xu38a"]
+
+[ext_resource type="Texture2D" uid="uid://dsllxn3vd3md7" path="res://Assets/Sprites/Game5/ui_life.png" id="1_ngpqa"]
+
+[node name="Pacman" type="TextureRect"]
+offset_left = 15.0
+offset_top = 15.0
+offset_right = 15.0
+offset_bottom = 15.0
+texture = ExtResource("1_ngpqa")

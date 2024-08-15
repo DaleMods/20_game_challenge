@@ -1,0 +1,214 @@
+[gd_scene load_steps=15 format=3 uid="uid://crqljora76eef"]
+
+[ext_resource type="Script" path="res://Scripts/Game2/game2.gd" id="1_wuftw"]
+[ext_resource type="Script" path="res://Scripts/Game2/Player.gd" id="2_t7531"]
+[ext_resource type="Texture2D" uid="uid://8jubmieu4syu" path="res://Assets/Sprites/Game2/paddle.png" id="3_7p3ng"]
+[ext_resource type="Script" path="res://Scripts/Game2/Ball.gd" id="3_ycdne"]
+[ext_resource type="AudioStream" uid="uid://btciufn6dxv8l" path="res://Assets/Sounds/Game2/BatHit.mp3" id="4_vq3te"]
+[ext_resource type="AudioStream" uid="uid://dtmhrfmd2u4hu" path="res://Assets/Sounds/Game2/WallHit.mp3" id="5_khbhd"]
+[ext_resource type="Texture2D" uid="uid://ci76fqbgkwbyi" path="res://Assets/Sprites/Game2/ball2.png" id="5_rmssd"]
+[ext_resource type="Script" path="res://Scripts/Game2/brick_spawner.gd" id="8_oy81x"]
+[ext_resource type="PackedScene" uid="uid://coyti5xcr24gh" path="res://Scenes/Game2/brick.tscn" id="9_ujs8j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xfi7f"]
+size = Vector2(10, 550)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h7nop"]
+size = Vector2(800, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xb8hf"]
+size = Vector2(100, 26)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_diuly"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n12ac"]
+size = Vector2(800, 30)
+
+[node name="Game" type="Control" node_paths=PackedStringArray("Ball")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wuftw")
+Ball = NodePath("Ball")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+position = Vector2(5, 325)
+shape = SubResource("RectangleShape2D_xfi7f")
+
+[node name="ColorRect" type="ColorRect" parent="LeftWall"]
+offset_top = 50.0
+offset_right = 10.0
+offset_bottom = 600.0
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+position = Vector2(790, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+position = Vector2(5, 325)
+shape = SubResource("RectangleShape2D_xfi7f")
+
+[node name="ColorRect" type="ColorRect" parent="RightWall"]
+offset_top = 50.0
+offset_right = 10.0
+offset_bottom = 600.0
+
+[node name="TopWall" type="StaticBody2D" parent="."]
+position = Vector2(0, 50)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall"]
+position = Vector2(400, 5)
+shape = SubResource("RectangleShape2D_h7nop")
+
+[node name="ColorRect" type="ColorRect" parent="TopWall"]
+offset_right = 800.0
+offset_bottom = 10.0
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(400, 550)
+script = ExtResource("2_t7531")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("RectangleShape2D_xb8hf")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+texture = ExtResource("3_7p3ng")
+
+[node name="Ball" type="CharacterBody2D" parent="." node_paths=PackedStringArray("player", "leftwall", "rightwall", "topwall")]
+position = Vector2(400, 524)
+script = ExtResource("3_ycdne")
+player = NodePath("../Player")
+leftwall = NodePath("../LeftWall")
+rightwall = NodePath("../RightWall")
+topwall = NodePath("../TopWall")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ball"]
+texture = ExtResource("5_rmssd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
+shape = SubResource("CircleShape2D_diuly")
+
+[node name="BatHit" type="AudioStreamPlayer" parent="Ball"]
+stream = ExtResource("4_vq3te")
+
+[node name="WallHit" type="AudioStreamPlayer" parent="Ball"]
+stream = ExtResource("5_khbhd")
+
+[node name="OutOfBounds" type="Area2D" parent="."]
+position = Vector2(400, 585)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OutOfBounds"]
+shape = SubResource("RectangleShape2D_n12ac")
+
+[node name="BrickSpawner" type="Node" parent="." node_paths=PackedStringArray("spawn_start")]
+script = ExtResource("8_oy81x")
+brick_scene = ExtResource("9_ujs8j")
+margin = Vector2(1, 1)
+spawn_start = NodePath("../Marker2D")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(400, 100)
+
+[node name="Score" type="Label" parent="."]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 10.0
+offset_right = 191.0
+offset_bottom = 44.0
+theme_override_font_sizes/font_size = 24
+text = "Score: 0"
+
+[node name="Lives" type="Label" parent="."]
+layout_mode = 0
+offset_left = 600.0
+offset_top = 10.0
+offset_right = 686.0
+offset_bottom = 44.0
+theme_override_font_sizes/font_size = 24
+text = "Lives: 0"
+
+[node name="Instructions" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.392157, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "
+
+
+SPACE   Release ball
+<--   -->  Move Paddle"
+
+[node name="GameOver" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -11.5
+offset_right = 0.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.392157, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "
+
+
+
+Game Over!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PressSpace" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -102.5
+offset_top = -11.5
+offset_right = 102.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.392157, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "
+
+
+
+
+
+
+
+Press SPACE for new game"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="OutOfBounds" to="." method="_on_out_of_bounds_body_entered"]

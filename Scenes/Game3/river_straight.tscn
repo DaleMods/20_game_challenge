@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlag3y1jnb8t6"]
+
+[ext_resource type="Script" path="res://Scripts/Game3/river_straight.gd" id="1_gx4yq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u6xpg"]
+size = Vector2(100, 1200)
+
+[node name="RiverStraight" type="Node2D"]
+script = ExtResource("1_gx4yq")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_mask = 3
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D"]
+offset_top = -1200.0
+offset_right = 100.0
+color = Color(0, 1, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(50, -600)
+shape = SubResource("RectangleShape2D_u6xpg")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(700, 0)
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D2"]
+offset_top = -1200.0
+offset_right = 100.0
+color = Color(0, 1, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(50, -600)
+shape = SubResource("RectangleShape2D_u6xpg")

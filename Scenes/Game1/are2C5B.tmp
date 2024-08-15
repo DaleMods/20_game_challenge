@@ -1,0 +1,137 @@
+[gd_scene load_steps=17 format=3 uid="uid://u3tg4y1qsom3"]
+
+[ext_resource type="Texture2D" uid="uid://clv6rg3pa5b12" path="res://Assets/Sprites/Arena.png" id="1_855ds"]
+[ext_resource type="Script" path="res://Scripts/Game1/Game1.gd" id="1_v77da"]
+[ext_resource type="Script" path="res://Scripts/Game1/Player1.gd" id="2_2nglu"]
+[ext_resource type="Texture2D" uid="uid://ckgmmqrt0hxt1" path="res://Assets/Sprites/Player1Paddle.png" id="2_lbtmy"]
+[ext_resource type="Texture2D" uid="uid://bgbk0vb7l1mpa" path="res://Assets/Sprites/Player2Paddle.png" id="3_h34ig"]
+[ext_resource type="Script" path="res://Scripts/Game1/Player2.gd" id="4_euflx"]
+[ext_resource type="Script" path="res://Scripts/Game1/Ball.gd" id="6_2ae2l"]
+[ext_resource type="Texture2D" uid="uid://bav5rpbf304eu" path="res://Assets/Sprites/Ball.png" id="6_50ts0"]
+[ext_resource type="AudioStream" uid="uid://cauipph8rti18" path="res://Assets/Sounds/Game1/Score.mp3" id="9_p2mmn"]
+[ext_resource type="AudioStream" uid="uid://dajnvg311nxys" path="res://Assets/Sounds/Game1/WallHit.mp3" id="10_665y8"]
+[ext_resource type="AudioStream" uid="uid://cxl3ilo7qi8qd" path="res://Assets/Sounds/Game1/BatHit.mp3" id="11_l8ylf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k6s4u"]
+size = Vector2(30, 110)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_khf04"]
+size = Vector2(25, 100)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l8njd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a3nrh"]
+size = Vector2(1280, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ta33"]
+size = Vector2(50, 800)
+
+[node name="Node2D" type="Control" node_paths=PackedStringArray("Ball")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_v77da")
+Ball = NodePath("Ball")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_855ds")
+
+[node name="Player1" type="CharacterBody2D" parent="."]
+position = Vector2(100, 400)
+script = ExtResource("2_2nglu")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player1"]
+texture = ExtResource("2_lbtmy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player1"]
+shape = SubResource("RectangleShape2D_k6s4u")
+
+[node name="PlayerArea2D" type="Area2D" parent="Player1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player1/PlayerArea2D"]
+shape = SubResource("RectangleShape2D_k6s4u")
+
+[node name="Player2" type="CharacterBody2D" parent="."]
+position = Vector2(1180, 400)
+script = ExtResource("4_euflx")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player2"]
+texture = ExtResource("3_h34ig")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player2"]
+shape = SubResource("RectangleShape2D_khf04")
+
+[node name="Ball" type="CharacterBody2D" parent="." node_paths=PackedStringArray("Player1")]
+position = Vector2(640, 400)
+script = ExtResource("6_2ae2l")
+Player1 = NodePath("../Player1")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ball"]
+texture = ExtResource("6_50ts0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
+shape = SubResource("CircleShape2D_l8njd")
+
+[node name="TopWall" type="StaticBody2D" parent="."]
+position = Vector2(640, 63)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall"]
+shape = SubResource("RectangleShape2D_a3nrh")
+
+[node name="BottomWall" type="StaticBody2D" parent="."]
+position = Vector2(640, 777)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomWall"]
+shape = SubResource("RectangleShape2D_a3nrh")
+
+[node name="LeftWinZone" type="Area2D" parent="."]
+position = Vector2(50, 400)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWinZone"]
+shape = SubResource("RectangleShape2D_8ta33")
+
+[node name="RightWinZone" type="Area2D" parent="."]
+position = Vector2(1230, 400)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWinZone"]
+shape = SubResource("RectangleShape2D_8ta33")
+
+[node name="Player1Score" type="Label" parent="."]
+layout_mode = 0
+offset_left = 360.0
+offset_top = 10.0
+offset_right = 539.0
+offset_bottom = 60.0
+theme_override_font_sizes/font_size = 36
+text = "Player 1: 0"
+
+[node name="Player2Score" type="Label" parent="."]
+layout_mode = 0
+offset_left = 740.0
+offset_top = 10.0
+offset_right = 919.0
+offset_bottom = 60.0
+theme_override_font_sizes/font_size = 36
+text = "Player 2: 0"
+
+[node name="Score" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_p2mmn")
+
+[node name="WallHit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_665y8")
+
+[node name="BatHit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_l8ylf")
+
+[connection signal="body_entered" from="Player1/PlayerArea2D" to="." method="_on_player_area_2d_body_entered"]
+[connection signal="body_entered" from="LeftWinZone" to="." method="_on_left_win_zone_body_entered"]
+[connection signal="body_entered" from="RightWinZone" to="." method="_on_right_win_zone_body_entered"]

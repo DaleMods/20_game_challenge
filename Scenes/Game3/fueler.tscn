@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://ci8aemp1vgrg4"]
+
+[ext_resource type="Script" path="res://Scripts/Game3/fueler.gd" id="1_5ipxl"]
+[ext_resource type="Texture2D" uid="uid://50p8qlsxjddq" path="res://Assets/Sprites/Game3/B-17/1.png" id="1_sb2hd"]
+[ext_resource type="Texture2D" uid="uid://rr23hfoh3ow8" path="res://Assets/Sprites/Game3/B-17/2.png" id="2_y16y6"]
+[ext_resource type="Texture2D" uid="uid://b0hjw7co4kw6i" path="res://Assets/Sprites/Game3/B-17/3.png" id="3_p6ixk"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n4bec"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_sb2hd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_y16y6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_p6ixk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4uf8a"]
+radius = 65.0
+
+[node name="Fueler" type="Area2D"]
+z_index = 7
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_5ipxl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_n4bec")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_4uf8a")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -40.0
+offset_top = -48.0
+offset_right = 36.0
+offset_bottom = -3.0
+theme_override_font_sizes/font_size = 32
+text = "FUEL"
+horizontal_alignment = 1
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

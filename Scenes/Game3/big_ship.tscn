@@ -1,0 +1,155 @@
+[gd_scene load_steps=22 format=3 uid="uid://bfp7x32wfyk1y"]
+
+[ext_resource type="Script" path="res://Scripts/Game3/big_ship.gd" id="1_s5f5x"]
+[ext_resource type="Texture2D" uid="uid://ddq5svoayg2p5" path="res://Assets/Sprites/Game3/BigShip/water_ripple_big_000.png" id="1_usiy4"]
+[ext_resource type="Texture2D" uid="uid://cytnwl0bhu474" path="res://Assets/Sprites/Game3/BigShip/water_ripple_big_001.png" id="2_6mt8c"]
+[ext_resource type="Texture2D" uid="uid://8x3ifr3cdo0r" path="res://Assets/Sprites/Game3/BigShip/water_ripple_big_002.png" id="3_mx8jk"]
+[ext_resource type="Texture2D" uid="uid://by05lmbmxcd2h" path="res://Assets/Sprites/Game3/BigShip/water_ripple_big_003.png" id="4_ouogn"]
+[ext_resource type="Texture2D" uid="uid://druoalr5vxffk" path="res://Assets/Sprites/Game3/BigShip/water_ripple_big_004.png" id="5_ipmj2"]
+[ext_resource type="Texture2D" uid="uid://b804thgxi5q5e" path="res://Assets/Sprites/Game3/BigShip/ship_large_body.png" id="6_b03e2"]
+[ext_resource type="Texture2D" uid="uid://d180o3berd0b" path="res://Assets/Sprites/Game3/BigShip/ship_large_body_destroyed.png" id="8_h4ck3"]
+[ext_resource type="Texture2D" uid="uid://dd8f1yv42k285" path="res://Assets/Sprites/Game3/BigShip/ship_big_gun.png" id="8_n4s6i"]
+[ext_resource type="Texture2D" uid="uid://b0gwd20q15lmb" path="res://Assets/Sprites/Game3/flame.png" id="10_20so1"]
+[ext_resource type="Texture2D" uid="uid://dechlo54r813w" path="res://Assets/Sprites/Game3/smoke.png" id="11_yjp5h"]
+[ext_resource type="AudioStream" uid="uid://ciw7c771li2qm" path="res://Assets/Sounds/Game3/ShipFire.wav" id="12_v1l05"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n5yls"]
+radius = 52.0
+height = 340.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0wds3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_usiy4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_6mt8c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_mx8jk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ouogn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ipmj2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jil7h"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mwobw"]
+bg_color = Color(0, 1, 0, 1)
+
+[sub_resource type="Curve" id="Curve_d5xh2"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.243339, 190.173), 0.0, 0.0, 0, 0, Vector2(0.497336, -3.07825), 0.0, 0.0, 0, 0, Vector2(0.761989, 178.461), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Curve" id="Curve_nffxe"]
+_data = [Vector2(0.0550622, 0.417101), 0.0, -0.743622, 0, 0, Vector2(0.50444, 0.446924), -2.65703, -2.65703, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_qevmy"]
+offsets = PackedFloat32Array(0, 0.1587, 0.3174, 0.539197, 0.703633, 0.848948, 1)
+colors = PackedColorArray(1, 1, 0.694118, 1, 0.946486, 0.868654, 0.612919, 1, 0.88, 0.705467, 0.132, 1, 0.89, 0.42987, 0.0534, 1, 0.840074, 0.352681, 0.111968, 1, 0.786582, 0.269978, 0.17472, 1, 1, 1, 1, 0)
+
+[sub_resource type="Curve" id="Curve_so50m"]
+_data = [Vector2(0, 0.00229418), 0.0, 0.0, 0, 0, Vector2(1, 0.00458837), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_c6fhi"]
+_data = [Vector2(0, 0.0239834), 0.0, 0.0, 0, 0, Vector2(1, 0.867153), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="BigShip" type="CharacterBody2D"]
+scale = Vector2(0.5, 0.5)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_s5f5x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_n5yls")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1, 14)
+sprite_frames = SubResource("SpriteFrames_0wds3")
+autoplay = "default"
+
+[node name="Ship" type="Sprite2D" parent="."]
+texture = ExtResource("6_b03e2")
+
+[node name="DestroyedShip" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("8_h4ck3")
+
+[node name="Gun1" type="Sprite2D" parent="."]
+position = Vector2(0, 69)
+texture = ExtResource("8_n4s6i")
+
+[node name="Gun2" type="Sprite2D" parent="."]
+position = Vector2(0, -62)
+texture = ExtResource("8_n4s6i")
+flip_v = true
+
+[node name="Health" type="ProgressBar" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_top = -200.0
+offset_right = 100.0
+offset_bottom = -173.0
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_jil7h")
+theme_override_styles/fill = SubResource("StyleBoxFlat_mwobw")
+
+[node name="Fire" type="CPUParticles2D" parent="."]
+modulate = Color(1, 1, 1, 0.129412)
+emitting = false
+amount = 5000
+lifetime = 0.6
+speed_scale = 0.4
+randomness = 1.0
+draw_order = 1
+texture = ExtResource("10_20so1")
+emission_shape = 1
+emission_sphere_radius = 32.0
+direction = Vector2(0, -1)
+spread = 0.0
+gravity = Vector2(0, -980)
+angular_velocity_min = -45.0
+angular_velocity_max = 45.0
+angular_velocity_curve = SubResource("Curve_d5xh2")
+scale_amount_min = 0.0
+scale_amount_max = 0.2
+scale_amount_curve = SubResource("Curve_nffxe")
+color_ramp = SubResource("Gradient_qevmy")
+
+[node name="Smoke" type="CPUParticles2D" parent="."]
+modulate = Color(1, 1, 1, 0.00784314)
+position = Vector2(0, -150)
+emitting = false
+amount = 1000
+lifetime = 3.0
+speed_scale = 0.3
+randomness = 1.0
+lifetime_randomness = 0.5
+texture = ExtResource("11_yjp5h")
+emission_shape = 2
+emission_sphere_radius = 23.0
+gravity = Vector2(0, -100)
+orbit_velocity_min = -0.2
+orbit_velocity_curve = SubResource("Curve_so50m")
+scale_amount_min = 0.0
+scale_amount_max = 0.3
+scale_amount_curve = SubResource("Curve_c6fhi")
+
+[node name="FireCanon" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_v1l05")

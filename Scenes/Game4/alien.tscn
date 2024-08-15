@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://706o48fx0xvj"]
+
+[ext_resource type="Texture2D" uid="uid://bf7rik7fmgljo" path="res://Assets/Sprites/Game4/alien.png" id="1_3sj1e"]
+[ext_resource type="Script" path="res://Scripts/Game4/alien.gd" id="1_mrc27"]
+[ext_resource type="AudioStream" uid="uid://ccmgguhfsilu4" path="res://Assets/Sounds/Game4/laser.wav" id="3_x1c1o"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ogr42"]
+radius = 35.0
+
+[node name="Alien" type="Area2D"]
+z_index = -5
+scale = Vector2(0.5, 0.5)
+collision_layer = 4
+collision_mask = 11
+script = ExtResource("1_mrc27")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_3sj1e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CircleShape2D_ogr42")
+
+[node name="Muzzle" type="Node2D" parent="."]
+position = Vector2(0, -40)
+
+[node name="LaserSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_x1c1o")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

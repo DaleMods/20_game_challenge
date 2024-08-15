@@ -1,0 +1,95 @@
+[gd_scene load_steps=2 format=3 uid="uid://bd406idkha21c"]
+
+[ext_resource type="Script" path="res://Scripts/menu_system.gd" id="1_uy7x6"]
+
+[node name="MenuSystem" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uy7x6")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_top = 50.0
+offset_right = 800.0
+offset_bottom = 110.0
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_font_sizes/font_size = 36
+text = "Dale's 20 Game Challenge!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
+
+[node name="Game1Button" type="Button" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_font_sizes/font_size = 16
+text = "Game 1
+Pong!"
+
+[node name="Game2Button" type="Button" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_font_sizes/font_size = 16
+text = "Game 2
+Breakout!"
+
+[node name="Game3Button" type="Button" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_font_sizes/font_size = 16
+text = "Game 3
+River Run!"
+
+[node name="Game4Button" type="Button" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_font_sizes/font_size = 16
+text = "Game 4
+Asteroids!"
+
+[node name="Game5Button" type="Button" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_font_sizes/font_size = 16
+text = "Game 5
+Pacman!"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_top = 550.0
+offset_right = 800.0
+offset_bottom = 590.0
+alignment = 1
+
+[node name="ExitButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "Exit to Desktop"
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Game1Button" to="." method="_on_game_1_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Game2Button" to="." method="_on_game_2_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Game3Button" to="." method="_on_game_3_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Game4Button" to="." method="_on_game_4_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Game5Button" to="." method="_on_game_5_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
