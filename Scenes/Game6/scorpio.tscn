@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://d07tpbr6gdce6"]
+
+[ext_resource type="Texture2D" uid="uid://cotvbkwbva1ud" path="res://Assets/Sprites/Game6/Scorpio/Scorpio1.png" id="1_26wrj"]
+[ext_resource type="Script" path="res://Scripts/Game6/scorpio.gd" id="1_dfokt"]
+[ext_resource type="Texture2D" uid="uid://cynsqecyw8q34" path="res://Assets/Sprites/Game6/Scorpio/Scorpio2.png" id="2_uw5ej"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4gdx2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_26wrj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_uw5ej")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_crwgt"]
+size = Vector2(15, 7)
+
+[node name="Scorpio" type="CharacterBody2D"]
+z_index = 5
+texture_filter = 1
+position = Vector2(650, 520)
+scale = Vector2(2, 2)
+collision_layer = 8
+collision_mask = 3
+script = ExtResource("1_dfokt")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 5
+sprite_frames = SubResource("SpriteFrames_4gdx2")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_crwgt")

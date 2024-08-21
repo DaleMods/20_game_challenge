@@ -1,0 +1,157 @@
+[gd_scene load_steps=9 format=3 uid="uid://b6tnons241me6"]
+
+[ext_resource type="Script" path="res://Scripts/Game6/game6.gd" id="1_ruxuq"]
+[ext_resource type="Script" path="res://Scripts/Game6/PlayerManager.gd" id="2_lb0le"]
+[ext_resource type="AudioStream" uid="uid://fcefy7vjlaox" path="res://Assets/Sounds/Game6/theme.mp3" id="4_ehl08"]
+[ext_resource type="PackedScene" uid="uid://dh133upj5cmbe" path="res://Scenes/Game6/room.tscn" id="5_jh146"]
+[ext_resource type="Script" path="res://Scripts/Game6/RoomManager.gd" id="6_bs3nu"]
+[ext_resource type="AudioStream" uid="uid://5oldk2kqggby" path="res://Assets/Sounds/Game6/balloon.mp3" id="6_ru67q"]
+[ext_resource type="AudioStream" uid="uid://cgqf1fd14aob6" path="res://Assets/Sounds/Game6/LoseGame.mp3" id="7_ffyhn"]
+[ext_resource type="FontFile" uid="uid://dlqs53330j0eu" path="res://Assets/Emulogic-zrEw.ttf" id="7_m7nqc"]
+
+[node name="Game6" type="Node2D"]
+script = ExtResource("1_ruxuq")
+
+[node name="Player" type="Node" parent="."]
+script = ExtResource("2_lb0le")
+
+[node name="Room" type="Node" parent="."]
+script = ExtResource("6_bs3nu")
+
+[node name="Room" parent="Room" instance=ExtResource("5_jh146")]
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="ThemeMusic" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("4_ehl08")
+volume_db = -10.0
+
+[node name="WinMusic" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("6_ru67q")
+
+[node name="LoseMusic" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("7_ffyhn")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 800.0
+offset_bottom = 600.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RoomNumber" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = -45.0
+offset_right = 193.0
+offset_bottom = -15.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("7_m7nqc")
+theme_override_font_sizes/font_size = 24
+text = "Room: 0"
+
+[node name="Score" type="Label" parent="UI"]
+z_index = 5
+layout_mode = 0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 65.0
+offset_bottom = 55.0
+theme_override_fonts/font = ExtResource("7_m7nqc")
+theme_override_font_sizes/font_size = 24
+text = "SCORE: 0"
+
+[node name="Time" type="Label" parent="UI"]
+z_index = 3
+layout_mode = 0
+offset_left = 530.0
+offset_top = 25.0
+offset_right = 770.0
+offset_bottom = 55.0
+theme_override_fonts/font = ExtResource("7_m7nqc")
+theme_override_font_sizes/font_size = 24
+text = "TIME: 1200"
+
+[node name="Panel" type="Panel" parent="UI"]
+z_index = 3
+custom_minimum_size = Vector2(700, 150)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -235.0
+offset_right = 350.0
+offset_bottom = -85.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Instructions" type="Label" parent="UI/Panel"]
+z_index = 5
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -65.0
+offset_right = 350.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.345098, 0, 1)
+theme_override_fonts/font = ExtResource("7_m7nqc")
+theme_override_font_sizes/font_size = 12
+text = "INSTRUCTIONS:
+- WASD KEYS TO MOVE
+- SPACE TO JUMP
+COLLECT THE TREASURES TO SCORE POINTS
+LOSE POINTS FOR HITTING LOGS, ANIMALS, WATER, TAR, FIRE"
+horizontal_alignment = 1
+
+[node name="PressSpace" type="Label" parent="UI/Panel"]
+z_index = 5
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 0
+offset_top = 110.0
+offset_right = 700.0
+offset_bottom = 140.0
+theme_override_colors/font_color = Color(1, 0.603922, 0, 1)
+theme_override_fonts/font = ExtResource("7_m7nqc")
+theme_override_font_sizes/font_size = 24
+text = "-PRESS SPACE TO BEGIN-"
+horizontal_alignment = 1
+
+[node name="GameOver" type="Label" parent="UI"]
+z_index = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.0
+offset_top = -31.5
+offset_right = 144.0
+offset_bottom = 31.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.294118, 0, 1)
+theme_override_fonts/font = ExtResource("7_m7nqc")
+theme_override_font_sizes/font_size = 24
+text = "GAME OVER
+YOU WIN/LOSE"
+horizontal_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1200.0

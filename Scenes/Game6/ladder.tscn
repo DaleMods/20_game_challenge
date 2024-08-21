@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://bws0cq6a1rgtu"]
+
+[ext_resource type="Script" path="res://Scripts/Game6/ladder.gd" id="1_cgvkx"]
+[ext_resource type="Texture2D" uid="uid://c0vaw1hppoecd" path="res://Assets/Sprites/Game6/Ladder.png" id="2_rsp6e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_txdyv"]
+size = Vector2(30, 211)
+
+[node name="Ladder" type="StaticBody2D"]
+z_index = -1
+position = Vector2(400, 465)
+scale = Vector2(0.8, 0.8)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_cgvkx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -50)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_rsp6e")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(0, 50)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_rsp6e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5.5)
+shape = SubResource("RectangleShape2D_txdyv")

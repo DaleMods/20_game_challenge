@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://b0oo10jo6sj0w"]
+
+[ext_resource type="Texture2D" uid="uid://vo47bvb62uax" path="res://Assets/Sprites/Game6/Croc/Croc1.png" id="1_6irtw"]
+[ext_resource type="Script" path="res://Scripts/Game6/croc.gd" id="1_jgmh4"]
+[ext_resource type="Texture2D" uid="uid://d4kkoftf4jpa1" path="res://Assets/Sprites/Game6/Croc/Croc2.png" id="2_b2234"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_knxex"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_6irtw")
+}],
+"loop": true,
+"name": &"closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_b2234")
+}],
+"loop": true,
+"name": &"open",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dfvqm"]
+size = Vector2(25, 15)
+
+[node name="Croc" type="CharacterBody2D"]
+z_index = 5
+texture_filter = 1
+scale = Vector2(2, 2)
+collision_layer = 9
+collision_mask = 3
+script = ExtResource("1_jgmh4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_knxex")
+animation = &"open"
+autoplay = "closed"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_dfvqm")

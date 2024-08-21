@@ -76,6 +76,19 @@ theme_override_font_sizes/font_size = 16
 text = "Game 5
 Pacman!"
 
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
+
+[node name="Game6Button" type="Button" parent="VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_font_sizes/font_size = 16
+text = "Game 6
+Pitfall!"
+
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
 offset_top = 550.0
@@ -92,4 +105,5 @@ text = "Exit to Desktop"
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Game3Button" to="." method="_on_game_3_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Game4Button" to="." method="_on_game_4_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Game5Button" to="." method="_on_game_5_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Game6Button" to="." method="_on_game_6_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

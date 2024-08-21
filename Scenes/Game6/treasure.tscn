@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://c2xjhe7sqyywh"]
+
+[ext_resource type="Script" path="res://Scripts/Game6/treasure.gd" id="1_crh7y"]
+[ext_resource type="Texture2D" uid="uid://dh8nfww40l172" path="res://Assets/Sprites/Game6/Treasures/PrizeMoney.png" id="1_hitv8"]
+[ext_resource type="Texture2D" uid="uid://bbae48sqxhpcd" path="res://Assets/Sprites/Game6/Treasures/PrizeSilver.png" id="2_luhk1"]
+[ext_resource type="Texture2D" uid="uid://boyy35oyqmc7y" path="res://Assets/Sprites/Game6/Treasures/PrizeGold.png" id="3_64mqy"]
+[ext_resource type="Texture2D" uid="uid://bqwkix0gg0em6" path="res://Assets/Sprites/Game6/Treasures/PrizeRing.png" id="4_nurmj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o4pg7"]
+size = Vector2(15, 20)
+
+[node name="Treasure" type="CharacterBody2D"]
+z_index = 3
+texture_filter = 1
+scale = Vector2(3, 3)
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_crh7y")
+
+[node name="Money" type="Sprite2D" parent="."]
+texture = ExtResource("1_hitv8")
+
+[node name="Silver" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_luhk1")
+
+[node name="Gold" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("3_64mqy")
+
+[node name="Ring" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("4_nurmj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2.33333)
+shape = SubResource("RectangleShape2D_o4pg7")

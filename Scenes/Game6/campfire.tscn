@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://blb2eyy6oio67"]
+
+[ext_resource type="Texture2D" uid="uid://m5t0dmhtuiij" path="res://Assets/Sprites/Game6/Bonfire/Bonfire1.png" id="1_gc6kj"]
+[ext_resource type="Script" path="res://Scripts/Game6/campfire.gd" id="1_rppxc"]
+[ext_resource type="Texture2D" uid="uid://b2f45w8nygrr5" path="res://Assets/Sprites/Game6/Bonfire/Bonfire2.png" id="2_70lb3"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_prfjw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_gc6kj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_70lb3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jh5a7"]
+size = Vector2(15, 7)
+
+[node name="campfire" type="CharacterBody2D"]
+z_index = 5
+texture_filter = 1
+position = Vector2(650, 350)
+scale = Vector2(2.5, 2.5)
+collision_layer = 8
+collision_mask = 3
+script = ExtResource("1_rppxc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_prfjw")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_jh5a7")

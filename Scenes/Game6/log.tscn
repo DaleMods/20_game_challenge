@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://l5ftku5q84jl"]
+
+[ext_resource type="Script" path="res://Scripts/Game6/log.gd" id="1_5seis"]
+[ext_resource type="Texture2D" uid="uid://bwybdwwkeaads" path="res://Assets/Sprites/Game6/Log/Log1.png" id="1_xuww8"]
+[ext_resource type="Texture2D" uid="uid://cjkgpln524wjh" path="res://Assets/Sprites/Game6/Log/Log2.png" id="2_rd5us"]
+[ext_resource type="Texture2D" uid="uid://btxrbyfse7de3" path="res://Assets/Sprites/Game6/Log/Log3.png" id="3_clcry"]
+[ext_resource type="Texture2D" uid="uid://bg3umuhrda5wm" path="res://Assets/Sprites/Game6/Log/Log4.png" id="4_3tca6"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3hobl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_xuww8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_rd5us")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_clcry")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_3tca6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1fybv"]
+size = Vector2(15, 7)
+
+[node name="Log" type="CharacterBody2D"]
+z_index = 5
+texture_filter = 1
+position = Vector2(650, 350)
+scale = Vector2(2, 2)
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_5seis")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_3hobl")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_1fybv")

@@ -1,0 +1,128 @@
+[gd_scene load_steps=20 format=3 uid="uid://dmc6j4p732il1"]
+
+[ext_resource type="Script" path="res://Scripts/Game6/harry.gd" id="1_0fjmc"]
+[ext_resource type="Texture2D" uid="uid://cav4jow4841no" path="res://Assets/Sprites/Game6/harry/PlayerClimb1.png" id="2_x0gaw"]
+[ext_resource type="Texture2D" uid="uid://c5bn44ktb5w21" path="res://Assets/Sprites/Game6/harry/PlayerClimb2.png" id="3_7em7e"]
+[ext_resource type="Texture2D" uid="uid://bjecy5difp7su" path="res://Assets/Sprites/Game6/harry/PlayerIdle.png" id="4_wndur"]
+[ext_resource type="Texture2D" uid="uid://h5fd1as4g4e0" path="res://Assets/Sprites/Game6/harry/PlayerJump2.png" id="5_yvqov"]
+[ext_resource type="Texture2D" uid="uid://bn2xnoqncv6gr" path="res://Assets/Sprites/Game6/harry/PlayerRun1.png" id="6_50qnv"]
+[ext_resource type="Texture2D" uid="uid://c3e01w4cw1o2e" path="res://Assets/Sprites/Game6/harry/PlayerRun2.png" id="7_p06qo"]
+[ext_resource type="Texture2D" uid="uid://y7jtooarte37" path="res://Assets/Sprites/Game6/harry/PlayerRun3.png" id="8_ee5fd"]
+[ext_resource type="Texture2D" uid="uid://du51tiagsph4b" path="res://Assets/Sprites/Game6/harry/PlayerRun4.png" id="9_vie5j"]
+[ext_resource type="Texture2D" uid="uid://b8mjprippun0b" path="res://Assets/Sprites/Game6/harry/PlayerRun5.png" id="10_ocjqk"]
+[ext_resource type="Texture2D" uid="uid://vab5eup08sy6" path="res://Assets/Sprites/Game6/harry/PlayerVine.png" id="11_yptwu"]
+[ext_resource type="AudioStream" uid="uid://1m1dgt21tail" path="res://Assets/Sounds/Game6/JumpRaw.wav" id="12_g3yr1"]
+[ext_resource type="AudioStream" uid="uid://d1u0exavgrwdp" path="res://Assets/Sounds/Game6/FallRaw.wav" id="13_ggjkw"]
+[ext_resource type="AudioStream" uid="uid://cn0bmjn5ukfss" path="res://Assets/Sounds/Game6/LoseRaw.wav" id="14_ofgsg"]
+[ext_resource type="AudioStream" uid="uid://ehqmrp2j70cc" path="res://Assets/Sounds/Game6/PrizeGrabRawwav.wav" id="15_8vidp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_awxsd"]
+atlas = ExtResource("4_wndur")
+region = Rect2(0, 0, 76, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bgvj2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_x0gaw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_7em7e")
+}],
+"loop": true,
+"name": &"climb",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_awxsd")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_yvqov")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_50qnv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_p06qo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ee5fd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_vie5j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ocjqk")
+}],
+"loop": true,
+"name": &"run",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_yptwu")
+}],
+"loop": true,
+"name": &"swing",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4rufy"]
+radius = 5.0
+height = 85.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2j3ki"]
+radius = 12.0
+height = 100.0
+
+[node name="Harry" type="CharacterBody2D"]
+z_index = 10
+texture_filter = 1
+scale = Vector2(0.6, 0.6)
+collision_layer = 2
+script = ExtResource("1_0fjmc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_bgvj2")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -26)
+shape = SubResource("CapsuleShape2D_4rufy")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 28
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -8)
+shape = SubResource("CapsuleShape2D_2j3ki")
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_g3yr1")
+
+[node name="Falling" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_ggjkw")
+
+[node name="Death" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_ofgsg")
+
+[node name="Treasure" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_8vidp")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
