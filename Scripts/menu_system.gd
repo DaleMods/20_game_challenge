@@ -26,3 +26,7 @@ func _on_game_5_button_pressed() -> void:
 
 func _on_game_6_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/Game6/game6.tscn")
+
+
+func _on_game_7_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://Scenes/Game7/game7.tscn")
