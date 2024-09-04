@@ -1,0 +1,79 @@
+[gd_scene load_steps=9 format=3 uid="uid://b1ak64nm0cp7w"]
+
+[ext_resource type="Script" path="res://Scripts/Game7/projectile.gd" id="1_7ud7f"]
+[ext_resource type="AudioStream" uid="uid://c60o7yf8x3jjy" path="res://Assets/Sounds/Game7/explode.wav" id="2_j4slu"]
+[ext_resource type="AudioStream" uid="uid://cj1s4740863ir" path="res://Assets/Sounds/Game7/hit_tree_rock.wav" id="3_w7qs4"]
+
+[sub_resource type="Gradient" id="Gradient_e2gty"]
+colors = PackedColorArray(1, 0.847059, 0.156863, 1, 1, 0.145098, 0.207843, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_10ma6"]
+gradient = SubResource("Gradient_e2gty")
+
+[sub_resource type="Curve" id="Curve_62k2a"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.414308), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_n08fx"]
+curve = SubResource("Curve_62k2a")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qlrmd"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 60.0
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 40, 0)
+damping_min = 28.13
+damping_max = 28.13
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_n08fx")
+color_ramp = SubResource("GradientTexture1D_10ma6")
+
+[node name="Projectile" type="Node2D"]
+z_index = 1
+script = ExtResource("1_7ud7f")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(1, 0, 0, 1)
+polygon = PackedVector2Array(-5, -2.5, 5, -2.5, 5, 2.5, -5, 2.5)
+
+[node name="Polygon2D2" type="Polygon2D" parent="Polygon2D"]
+color = Color(1, 0, 0, 1)
+polygon = PackedVector2Array(5, -2.5, 8, -1.5, 9, 0, 8, 1.5, 5, 2.5)
+
+[node name="CollisionDetection" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CollisionDetection"]
+polygon = PackedVector2Array(-5, -2.5, 5, -2.5, 8, -1.5, 9, 0, 8, 1.5, 5, 2.5, -5, 2.5)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="DestructionPolygon" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-11.5, -9.5, 0, -13.5, 11.5, -9.5, 16.5, 0, 11.5, 9.5, 0, 13.5, -11.5, 9.5, -16.5, 0)
+
+[node name="Explosion" type="GPUParticles2D" parent="."]
+position = Vector2(0, 25)
+emitting = false
+amount = 3000
+process_material = SubResource("ParticleProcessMaterial_qlrmd")
+lifetime = 3.0
+one_shot = true
+explosiveness = 1.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="Explode" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_j4slu")
+volume_db = -5.0
+
+[node name="Debris" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_w7qs4")
+
+[connection signal="body_entered" from="CollisionDetection" to="." method="_on_collision_detection_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

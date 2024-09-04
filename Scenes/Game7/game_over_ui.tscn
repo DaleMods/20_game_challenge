@@ -1,0 +1,91 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpilyxunecr54"]
+
+[ext_resource type="FontFile" uid="uid://csl3n5yxlmh1l" path="res://Assets/gunplay rg.otf" id="1_4infm"]
+[ext_resource type="Script" path="res://Scripts/Game7/game_over_ui.gd" id="1_145ee"]
+[ext_resource type="Texture2D" uid="uid://bv8lhya62pnlb" path="res://Assets/Sprites/Game7/button.png" id="2_bfefc"]
+
+[node name="GameOverUI" type="Control"]
+custom_minimum_size = Vector2(800, 600)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_145ee")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -75.0
+offset_right = 175.0
+offset_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bfefc")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -47.0
+offset_right = 175.0
+offset_bottom = 47.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameOver" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.211765, 0.211765, 0.211765, 1)
+theme_override_fonts/font = ExtResource("1_4infm")
+theme_override_font_sizes/font_size = 36
+text = "GAME OVER!"
+horizontal_alignment = 1
+
+[node name="Winner" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.211765, 0.211765, 0.211765, 1)
+theme_override_fonts/font = ExtResource("1_4infm")
+theme_override_font_sizes/font_size = 36
+text = "PLAYER 1 WINS!"
+horizontal_alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 325.0
+offset_top = 400.0
+offset_right = 475.0
+offset_bottom = 497.0
+texture_normal = ExtResource("2_bfefc")
+texture_pressed = ExtResource("2_bfefc")
+texture_hover = ExtResource("2_bfefc")
+
+[node name="Label" type="Label" parent="TextureButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -28.5
+offset_right = 20.0
+offset_bottom = 1.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.211765, 0.211765, 0.211765, 1)
+theme_override_fonts/font = ExtResource("1_4infm")
+theme_override_font_sizes/font_size = 24
+text = "OK"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

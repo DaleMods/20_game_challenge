@@ -1,0 +1,51 @@
+[gd_scene load_steps=9 format=3 uid="uid://bue5yot2xqvek"]
+
+[ext_resource type="Script" path="res://Scripts/Game7/game7.gd" id="1_im014"]
+[ext_resource type="PackedScene" uid="uid://dvdeaplm6e7hm" path="res://Scenes/Game7/terrain.tscn" id="1_wtlab"]
+[ext_resource type="PackedScene" uid="uid://cm031bfe3qoy" path="res://Scenes/Game7/main_menu.tscn" id="3_l0fvi"]
+[ext_resource type="PackedScene" uid="uid://ltu2yenhcs8" path="res://Scenes/Game7/options_menu.tscn" id="4_nwfou"]
+[ext_resource type="PackedScene" uid="uid://bpilyxunecr54" path="res://Scenes/Game7/game_over_ui.tscn" id="4_x58ml"]
+[ext_resource type="AudioStream" uid="uid://cknjh44uqu8yn" path="res://Assets/Sounds/Game7/Game7Music.mp3" id="5_do1sf"]
+[ext_resource type="PackedScene" uid="uid://csq7qyi76ujyp" path="res://Scenes/Game7/game_ui.tscn" id="5_yuvst"]
+[ext_resource type="Script" path="res://Scripts/Game7/Players.gd" id="6_uprwp"]
+
+[node name="Game7" type="Node2D"]
+script = ExtResource("1_im014")
+
+[node name="Terrain" parent="." instance=ExtResource("1_wtlab")]
+visible = false
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(400, 300)
+
+[node name="MainMenu" parent="." instance=ExtResource("3_l0fvi")]
+visible = false
+custom_minimum_size = Vector2(800, 600)
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 800.0
+offset_bottom = 600.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="OptionsMenu" parent="." instance=ExtResource("4_nwfou")]
+visible = false
+
+[node name="GameOverUI" parent="." instance=ExtResource("4_x58ml")]
+visible = false
+offset_right = 800.0
+offset_bottom = 600.0
+
+[node name="GameUI" parent="." instance=ExtResource("5_yuvst")]
+visible = false
+offset_right = 800.0
+offset_bottom = 600.0
+
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_do1sf")
+volume_db = -5.0
+autoplay = true
+
+[node name="Players" type="Node" parent="."]
+script = ExtResource("6_uprwp")

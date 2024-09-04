@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://dvdeaplm6e7hm"]
+
+[ext_resource type="Script" path="res://Scripts/Game7/terrain.gd" id="1_wapuf"]
+[ext_resource type="Texture2D" uid="uid://dqfh3mvyn3hrr" path="res://Assets/Sprites/Game7/Other/sky.png" id="2_2y46f"]
+[ext_resource type="Texture2D" uid="uid://b2gjvjk6mu411" path="res://Assets/Sprites/Game7/Terrain/DirtBG.png" id="3_6cgna"]
+[ext_resource type="Texture2D" uid="uid://bmfmol0pdydb6" path="res://Assets/Sprites/Game7/Terrain/Grass.png" id="3_ihl0p"]
+
+[node name="Terrain" type="Node2D"]
+script = ExtResource("1_wapuf")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -10
+offset_left = -580.0
+offset_top = -80.0
+offset_right = 1340.0
+offset_bottom = 1000.0
+texture = ExtResource("2_2y46f")
+
+[node name="Terrain" type="StaticBody2D" parent="." groups=["Destructible"]]
+texture_filter = 1
+
+[node name="Path2D" type="Path2D" parent="Terrain"]
+
+[node name="Line2D" type="Line2D" parent="Terrain"]
+texture_filter = 1
+texture_repeat = 2
+closed = true
+texture = ExtResource("3_ihl0p")
+texture_mode = 1
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain"]
+z_index = -1
+texture_repeat = 2
+texture = ExtResource("3_6cgna")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Terrain"]
+
+[node name="Objects" type="Node" parent="."]

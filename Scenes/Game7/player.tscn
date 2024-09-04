@@ -1,0 +1,116 @@
+[gd_scene load_steps=15 format=3 uid="uid://dc5am68i8fknh"]
+
+[ext_resource type="Script" path="res://Scripts/Game7/player.gd" id="1_ftfop"]
+[ext_resource type="Texture2D" uid="uid://c7eyw7xrt625l" path="res://Assets/Sprites/Game7/tank.png" id="1_oij5x"]
+[ext_resource type="Texture2D" uid="uid://6tt0ge4ooiu1" path="res://Assets/Sprites/Game7/turret.png" id="2_sersc"]
+[ext_resource type="FontFile" uid="uid://csl3n5yxlmh1l" path="res://Assets/gunplay rg.otf" id="3_3n17q"]
+[ext_resource type="AudioStream" uid="uid://bimkh88t5txed" path="res://Assets/Sounds/Game7/tank_fire.wav" id="5_p311q"]
+[ext_resource type="Script" path="res://Scripts/Game7/AI.gd" id="6_iujsf"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q6qy2"]
+radius = 29.0
+height = 84.0
+
+[sub_resource type="Gradient" id="Gradient_s5677"]
+colors = PackedColorArray(1, 0.847059, 0.156863, 1, 1, 0.145098, 0.207843, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_o0baa"]
+gradient = SubResource("Gradient_s5677")
+
+[sub_resource type="Curve" id="Curve_ym7rj"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.414308), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_2cqwc"]
+curve = SubResource("Curve_ym7rj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_61hvs"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 120.0
+gravity = Vector3(0, 40, 0)
+damping_min = 28.13
+damping_max = 28.13
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_2cqwc")
+color_ramp = SubResource("GradientTexture1D_o0baa")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jw87q"]
+bg_color = Color(0.376093, 8.3928e-07, 9.62615e-08, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mu2js"]
+bg_color = Color(5.77569e-07, 0.78525, 1.92523e-06, 1)
+
+[node name="Player" type="CharacterBody2D"]
+texture_filter = 1
+script = ExtResource("1_ftfop")
+
+[node name="Turret" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(17, -14)
+texture = ExtResource("2_sersc")
+offset = Vector2(10, 0)
+
+[node name="Muzzle" type="Marker2D" parent="Turret"]
+position = Vector2(500, 0)
+
+[node name="Tank" type="Sprite2D" parent="."]
+texture = ExtResource("1_oij5x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_q6qy2")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Fire" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_p311q")
+volume_db = -5.0
+
+[node name="Explosion" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 3000
+process_material = SubResource("ParticleProcessMaterial_61hvs")
+lifetime = 3.0
+one_shot = true
+explosiveness = 1.0
+
+[node name="PlayerDeets" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -16.0
+offset_top = -157.0
+offset_right = 24.0
+offset_bottom = -117.0
+
+[node name="Label" type="Label" parent="PlayerDeets"]
+layout_mode = 0
+offset_left = 50.0
+offset_right = 120.0
+offset_bottom = 30.0
+theme_override_colors/font_color = Color(0.878431, 0.572549, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_3n17q")
+theme_override_font_sizes/font_size = 24
+text = "Player"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="PlayerDeets"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 0
+offset_top = 40.0
+offset_right = 200.0
+offset_bottom = 90.0
+theme_override_colors/font_color = Color(0.878431, 0.572549, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("3_3n17q")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/background = SubResource("StyleBoxFlat_jw87q")
+theme_override_styles/fill = SubResource("StyleBoxFlat_mu2js")
+max_value = 1.0
+
+[node name="AI" type="Node" parent="."]
+script = ExtResource("6_iujsf")

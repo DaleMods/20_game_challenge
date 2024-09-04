@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://cj1kdq53jx4bh"]
+
+[ext_resource type="Script" path="res://Scripts/Game7/tree.gd" id="1_m1iix"]
+[ext_resource type="Texture2D" uid="uid://dq28jdy2cmo1d" path="res://Assets/Sprites/Game7/Terrain/tree.png" id="1_thi41"]
+
+[sub_resource type="Gradient" id="Gradient_kfhgk"]
+colors = PackedColorArray(1, 0.847059, 0.156863, 1, 1, 0.145098, 0.207843, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fnkip"]
+gradient = SubResource("Gradient_kfhgk")
+
+[sub_resource type="Curve" id="Curve_gpta6"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.414308), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_c7gt5"]
+curve = SubResource("Curve_gpta6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5jbsi"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 120.0
+gravity = Vector3(0, 40, 0)
+damping_min = 28.13
+damping_max = 28.13
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_c7gt5")
+color_ramp = SubResource("GradientTexture1D_fnkip")
+
+[node name="Tree" type="StaticBody2D"]
+texture_filter = 1
+script = ExtResource("1_m1iix")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("1_thi41")
+
+[node name="Tree" type="StaticBody2D" parent="." groups=["Destructible"]]
+z_index = -2
+
+[node name="Polygon2D" type="Polygon2D" parent="Tree"]
+texture = ExtResource("1_thi41")
+texture_offset = Vector2(45, 50)
+polygon = PackedVector2Array(0, -50, 12, -49, 25, -43, 32, -36, 36, -27, 40, -19, 44, -8, 44, 0, 27, 12, 7, 12, 6, 31, 10, 50, -9, 50, -5, 31, -6, 14, -23, 13, -37, 10, -45, -3, -45, -8, -38, -18, -36, -26, -29, -36, -18, -47, -1, -50)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Tree"]
+
+[node name="Explosion" type="GPUParticles2D" parent="Tree"]
+position = Vector2(0, 50)
+emitting = false
+amount = 3000
+process_material = SubResource("ParticleProcessMaterial_5jbsi")
+lifetime = 3.0
+one_shot = true
+explosiveness = 1.0

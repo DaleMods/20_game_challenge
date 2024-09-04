@@ -1,0 +1,108 @@
+[gd_scene load_steps=15 format=3 uid="uid://d258pnncrgy1m"]
+
+[ext_resource type="Script" path="res://Scripts/Game7/windsock.gd" id="1_ji630"]
+[ext_resource type="Texture2D" uid="uid://pcgecvsfv4gp" path="res://Assets/Sprites/Game7/windsock.png" id="1_rq5ut"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yxprf"]
+atlas = ExtResource("1_rq5ut")
+region = Rect2(138, 0, 138, 138)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hg8fw"]
+atlas = ExtResource("1_rq5ut")
+region = Rect2(414, 0, 138, 138)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qo86m"]
+atlas = ExtResource("1_rq5ut")
+region = Rect2(276, 0, 138, 138)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3wyn2"]
+atlas = ExtResource("1_rq5ut")
+region = Rect2(276, 138, 138, 138)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yuny4"]
+atlas = ExtResource("1_rq5ut")
+region = Rect2(414, 138, 138, 138)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7g0py"]
+atlas = ExtResource("1_rq5ut")
+region = Rect2(276, 276, 138, 138)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j4st1"]
+atlas = ExtResource("1_rq5ut")
+region = Rect2(0, 0, 138, 138)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5k0n4"]
+atlas = ExtResource("1_rq5ut")
+region = Rect2(138, 276, 138, 138)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ih68a"]
+atlas = ExtResource("1_rq5ut")
+region = Rect2(414, 276, 138, 138)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4ut8"]
+atlas = ExtResource("1_rq5ut")
+region = Rect2(138, 138, 138, 138)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l5r3d"]
+atlas = ExtResource("1_rq5ut")
+region = Rect2(0, 138, 138, 138)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_74l21"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yxprf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hg8fw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qo86m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3wyn2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yuny4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7g0py")
+}],
+"loop": true,
+"name": &"HighWind",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j4st1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5k0n4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ih68a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y4ut8")
+}],
+"loop": true,
+"name": &"LowWind",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l5r3d")
+}],
+"loop": true,
+"name": &"NoWind",
+"speed": 5.0
+}]
+
+[node name="Windsock" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_ji630")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_74l21")
+animation = &"NoWind"
+autoplay = "NoWind"
