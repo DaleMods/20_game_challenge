@@ -1,0 +1,11 @@
+Model Information:
+* title:	Star Wars Hangar Bridge
+* source:	https://sketchfab.com/3d-models/star-wars-hangar-bridge-91d920eea2f845f1b874b3b462c22e32
+* author:	LarsH. (https://sketchfab.com/LarsH.)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Star Wars Hangar Bridge" (https://sketchfab.com/3d-models/star-wars-hangar-bridge-91d920eea2f845f1b874b3b462c22e32) by LarsH. (https://sketchfab.com/LarsH.) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
