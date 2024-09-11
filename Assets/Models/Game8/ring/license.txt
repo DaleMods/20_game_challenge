@@ -1,0 +1,11 @@
+Model Information:
+* title:	Halo Ring
+* source:	https://sketchfab.com/3d-models/halo-ring-7821843cacd144de833ddb39e7fc0f3e
+* author:	Inditrion Dradnon (https://sketchfab.com/dradnon)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Halo Ring" (https://sketchfab.com/3d-models/halo-ring-7821843cacd144de833ddb39e7fc0f3e) by Inditrion Dradnon (https://sketchfab.com/dradnon) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
