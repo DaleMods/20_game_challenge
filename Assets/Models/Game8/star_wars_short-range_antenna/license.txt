@@ -1,0 +1,11 @@
+Model Information:
+* title:	Star Wars Short-Range Antenna
+* source:	https://sketchfab.com/3d-models/star-wars-short-range-antenna-89f338998ae84e318aa36bbf1d29d255
+* author:	tegnemaskin (https://sketchfab.com/tegnemaskin)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Star Wars Short-Range Antenna" (https://sketchfab.com/3d-models/star-wars-short-range-antenna-89f338998ae84e318aa36bbf1d29d255) by tegnemaskin (https://sketchfab.com/tegnemaskin) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
