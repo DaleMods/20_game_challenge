@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cbrjww7y2xl8s"]
+
+[ext_resource type="Script" path="res://Scripts/Game8/rebel_bullet.gd" id="1_tiviw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wbmt7"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tdhiv"]
+material = SubResource("StandardMaterial3D_wbmt7")
+size = Vector3(0.2, 0.2, 2)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ek3wu"]
+height = 2.5
+
+[node name="rebel_bullet" type="CharacterBody3D"]
+collision_layer = 4
+script = ExtResource("1_tiviw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_tdhiv")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_ek3wu")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

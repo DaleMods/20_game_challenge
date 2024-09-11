@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cm5cq05k863je"]
+
+[ext_resource type="Script" path="res://Scripts/Game8/ring_spawner.gd" id="1_8k4ty"]
+[ext_resource type="AudioStream" uid="uid://dii6vlfdhqo2r" path="res://Assets/Sounds/Game8/ring_score.mp3" id="2_gy6mw"]
+
+[node name="RingSpawner" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 95)
+script = ExtResource("1_8k4ty")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="Score" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_gy6mw")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

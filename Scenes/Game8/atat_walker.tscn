@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://deop084q63j1n"]
+
+[ext_resource type="PackedScene" uid="uid://b1licgg2vgxit" path="res://Scenes/Game8/atat_model.tscn" id="1_bt1rr"]
+[ext_resource type="Script" path="res://Scripts/Game8/atat_walker.gd" id="1_wgwd8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8xd8r"]
+size = Vector3(6, 22, 24)
+
+[node name="ATATWalker" type="CharacterBody3D" groups=["Rebel"]]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+collision_layer = 3
+collision_mask = 0
+script = ExtResource("1_wgwd8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11, 4)
+shape = SubResource("BoxShape3D_8xd8r")
+
+[node name="ATAT" parent="." instance=ExtResource("1_bt1rr")]

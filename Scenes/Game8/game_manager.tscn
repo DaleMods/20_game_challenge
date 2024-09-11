@@ -1,0 +1,306 @@
+[gd_scene load_steps=20 format=3 uid="uid://cx6jrmp52n1e7"]
+
+[ext_resource type="Script" path="res://Scripts/Game8/GameManager.gd" id="1_nboac"]
+[ext_resource type="PackedScene" uid="uid://bt7jqruovtfdo" path="res://Scenes/Game8/player.tscn" id="2_mdvmy"]
+[ext_resource type="PackedScene" uid="uid://bewppclptt2sq" path="res://Scenes/Game8/enemy_spawner.tscn" id="3_um8r4"]
+[ext_resource type="PackedScene" uid="uid://cm5cq05k863je" path="res://Scenes/Game8/ring_spawner.tscn" id="4_ewx51"]
+[ext_resource type="Texture2D" uid="uid://cc4xk8rjywlnp" path="res://Assets/Sprites/Game8/panorama.jpg" id="5_jv3sx"]
+[ext_resource type="FontFile" uid="uid://berfaonrb5yns" path="res://Assets/Starjedi.ttf" id="6_pdm14"]
+[ext_resource type="Texture2D" uid="uid://brviet0ciewry" path="res://Assets/Sprites/Game8/button.png" id="7_wff3e"]
+[ext_resource type="Texture2D" uid="uid://cy3y0crcuda3s" path="res://Assets/Sprites/Game8/button_hover.png" id="8_e1ud5"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lf2u4"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_ruokf"]
+sky_material = SubResource("ProceduralSkyMaterial_lf2u4")
+
+[sub_resource type="Environment" id="Environment_vkhmg"]
+background_mode = 2
+sky = SubResource("Sky_ruokf")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ilqob"]
+shading_mode = 0
+albedo_color = Color(0.670588, 0.490196, 0.247059, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_oalnb"]
+material = SubResource("StandardMaterial3D_ilqob")
+size = Vector2(300, 200)
+center_offset = Vector3(0, -40, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_50dnr"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ht82k"]
+bg_color = Color(0, 1, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_alitx"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hg3o1"]
+bg_color = Color(0, 1, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ta1sh"]
+bg_color = Color(0.316785, 0.316785, 0.316785, 1)
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xlldv"]
+bg_color = Color(0.316785, 0.316785, 0.316785, 1)
+draw_center = false
+
+[node name="GameManager" type="Node3D"]
+script = ExtResource("1_nboac")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vkhmg")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 2, -19.822)
+far = 500.0
+
+[node name="Player" parent="." instance=ExtResource("2_mdvmy")]
+
+[node name="EnemySpawner" parent="." instance=ExtResource("3_um8r4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 95)
+
+[node name="RingSpawner" parent="." instance=ExtResource("4_ewx51")]
+
+[node name="Bullets" type="Node" parent="."]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(37, 0, 0, 0, 37, 0, 0, 0, 37, 0, 0, 100)
+flip_h = true
+texture = ExtResource("5_jv3sx")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("PlaneMesh_oalnb")
+
+[node name="UI" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -300.0
+offset_right = 400.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Score" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -215.0
+offset_bottom = 45.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("6_pdm14")
+theme_override_font_sizes/font_size = 36
+text = "Score: 0000"
+
+[node name="PlayerBox" type="VBoxContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 100.0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="UI/PlayerBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_pdm14")
+theme_override_font_sizes/font_size = 18
+text = "Player Shield:"
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="UI/PlayerBox"]
+custom_minimum_size = Vector2(200, 39)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_pdm14")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/background = SubResource("StyleBoxFlat_50dnr")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ht82k")
+step = 1.0
+value = 100.0
+show_percentage = false
+
+[node name="BossBox" type="VBoxContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -54.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="UI/BossBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_pdm14")
+theme_override_font_sizes/font_size = 18
+text = "Boss Shield:"
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="UI/BossBox"]
+custom_minimum_size = Vector2(200, 39)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_pdm14")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/background = SubResource("StyleBoxFlat_alitx")
+theme_override_styles/fill = SubResource("StyleBoxFlat_hg3o1")
+step = 1.0
+value = 100.0
+show_percentage = false
+
+[node name="EndGame" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="EndGame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -100.0
+offset_right = 200.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ta1sh")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EndGame/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -123.0
+offset_top = -64.5
+offset_right = 123.0
+offset_bottom = 64.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="EndGame/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("6_pdm14")
+theme_override_font_sizes/font_size = 36
+text = "Game over!"
+horizontal_alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="EndGame/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("7_wff3e")
+texture_pressed = ExtResource("8_e1ud5")
+texture_hover = ExtResource("8_e1ud5")
+
+[node name="Label" type="Label" parent="EndGame/Panel/VBoxContainer/TextureButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_pdm14")
+theme_override_font_sizes/font_size = 24
+text = "ok"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EndLevel" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="EndLevel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -100.0
+offset_right = 200.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xlldv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EndLevel/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -123.0
+offset_top = -64.5
+offset_right = 123.0
+offset_bottom = 64.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="EndLevel/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("6_pdm14")
+theme_override_font_sizes/font_size = 36
+text = "Level Cleared!"
+horizontal_alignment = 1
+
+[node name="OkButton" type="TextureButton" parent="EndLevel/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("7_wff3e")
+texture_pressed = ExtResource("8_e1ud5")
+texture_hover = ExtResource("8_e1ud5")
+
+[node name="Label" type="Label" parent="EndLevel/Panel/VBoxContainer/OkButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_pdm14")
+theme_override_font_sizes/font_size = 24
+text = "ok"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="EndGame/Panel/VBoxContainer/TextureButton" to="." method="_on_texture_button_pressed"]
+[connection signal="pressed" from="EndLevel/Panel/VBoxContainer/OkButton" to="." method="_on_ok_button_pressed"]

@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dm026fnkgmlxn"]
+
+[ext_resource type="Script" path="res://Scripts/Game8/container.gd" id="1_my32s"]
+[ext_resource type="PackedScene" uid="uid://dl58c8nei4l8y" path="res://Assets/Models/Game8/container/scene.gltf" id="1_roemq"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vc3ti"]
+radius = 1.03636
+
+[node name="Container" type="StaticBody3D"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+script = ExtResource("1_my32s")
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("1_roemq")]
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.407609, 0)
+shape = SubResource("SphereShape3D_vc3ti")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

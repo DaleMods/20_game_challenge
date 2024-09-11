@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://yq7ja2nkfjsj"]
+
+[ext_resource type="Script" path="res://Scripts/Game8/player_bullet.gd" id="1_v6nsr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_34y82"]
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_y1k8e"]
+material = SubResource("StandardMaterial3D_34y82")
+size = Vector3(0.2, 0.2, 2)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sfibo"]
+radius = 1.0
+height = 2.5
+
+[node name="PlayerBullet" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_v6nsr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_y1k8e")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_sfibo")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

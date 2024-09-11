@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bfhn7ypeisnfp"]
+
+[ext_resource type="PackedScene" uid="uid://1s0qu05e8h0e" path="res://Assets/Models/Game8/ring/scene.gltf" id="1_nia6h"]
+[ext_resource type="Script" path="res://Scripts/Game8/ring.gd" id="1_ogoew"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_iw5uw"]
+height = 10.0
+radius = 1000.0
+
+[node name="Ring" type="StaticBody3D"]
+transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, 0, 0, 0)
+script = ExtResource("1_ogoew")
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("1_nia6h")]
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 60, 0)
+shape = SubResource("CylinderShape3D_iw5uw")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

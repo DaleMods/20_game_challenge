@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://btwwmeeenk8ma"]
+
+[ext_resource type="Script" path="res://Scripts/Game8/xwing.gd" id="1_38og7"]
+[ext_resource type="PackedScene" uid="uid://cdusb33s030jr" path="res://Assets/Models/Game8/xwing/scene.gltf" id="3_1mgyp"]
+[ext_resource type="AudioStream" uid="uid://cphhlqfhaweno" path="res://Assets/Sounds/Game8/xwing_laser.mp3" id="56_1lnr3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_eyvbq"]
+size = Vector3(6.53101, 2.07518, 6.4541)
+
+[node name="Xwing" type="CharacterBody3D" groups=["Rebel"]]
+collision_layer = 3
+script = ExtResource("1_38og7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0345459, 0.96923, -0.515137)
+shape = SubResource("BoxShape3D_eyvbq")
+
+[node name="Gun0" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -2.5)
+
+[node name="Gun1" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, -2.5)
+
+[node name="Gun2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1.7, -2.5)
+
+[node name="Gun3" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 1.7, -2.5)
+
+[node name="Laser" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("56_1lnr3")
+volume_db = -10.0
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("3_1mgyp")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1.08585, -1.79515)

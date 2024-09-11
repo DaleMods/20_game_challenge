@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://drxtv4wtkdv6b"]
+
+[ext_resource type="PackedScene" uid="uid://de18432pcbu2l" path="res://Assets/Models/Game8/star_wars_hangar_bridge/scene.gltf" id="1_clp4k"]
+[ext_resource type="Script" path="res://Scripts/Game8/bridge.gd" id="1_nvtjg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cp8e8"]
+size = Vector3(0.438721, 0.751007, 0.394104)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v8emk"]
+size = Vector3(1.70248, 0.271976, 0.394104)
+
+[node name="Bridge" type="CharacterBody3D" groups=["Rebel"]]
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)
+collision_layer = 3
+collision_mask = 0
+script = ExtResource("1_nvtjg")
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("1_clp4k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.689844, 0.375595, -0.00259399)
+shape = SubResource("BoxShape3D_cp8e8")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.707792, 0.375595, -0.00259399)
+shape = SubResource("BoxShape3D_cp8e8")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032174, 0.882619, -0.00259399)
+shape = SubResource("BoxShape3D_v8emk")

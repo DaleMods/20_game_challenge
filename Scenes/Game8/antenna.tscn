@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dc17304biamji"]
+
+[ext_resource type="PackedScene" uid="uid://cxsxtrbci0f5b" path="res://Assets/Models/Game8/star_wars_short-range_antenna/scene.gltf" id="1_bde5u"]
+[ext_resource type="Script" path="res://Scripts/Game8/antenna.gd" id="1_dgfsh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_isavu"]
+size = Vector3(1, 4.70798, 1.54712)
+
+[node name="Antenna" type="CharacterBody3D" groups=["Rebel"]]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+collision_layer = 3
+collision_mask = 0
+script = ExtResource("1_dgfsh")
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("1_bde5u")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.24068, -0.147827)
+shape = SubResource("BoxShape3D_isavu")
