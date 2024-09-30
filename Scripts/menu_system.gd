@@ -34,3 +34,7 @@ func _on_game_7_button_pressed() -> void:
 
 func _on_game_8_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/Game8/game8.tscn")
+
+
+func _on_game_9_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://Game9/game9.tscn")
