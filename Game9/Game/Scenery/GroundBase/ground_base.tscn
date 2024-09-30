@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://bt6rfhmm38ahi"]
+
+[ext_resource type="Material" uid="uid://dttko535dcgyk" path="res://Game9/Game/Tracks/ground_material.tres" id="1_1benj"]
+[ext_resource type="Script" path="res://Game9/Game/Scenery/GroundBase/ground_base.gd" id="1_qsxcy"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_t402e"]
+material = ExtResource("1_1benj")
+size = Vector3(100, 10, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oh46v"]
+size = Vector3(100, 10, 5)
+
+[node name="GroundBase" type="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, -0.5, 0)
+script = ExtResource("1_qsxcy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+mesh = SubResource("BoxMesh_t402e")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+shape = SubResource("BoxShape3D_oh46v")
+
+[node name="Down1Collider" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -47, 0, 0)
+target_position = Vector3(0, -50, 0)
+
+[node name="Down2Collider" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47, 0, 0)
+target_position = Vector3(0, -50, 0)
+
+[node name="Down3Collider" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, 0)
+target_position = Vector3(0, -50, 0)
+
+[node name="Down4Collider" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, 0)
+target_position = Vector3(0, -50, 0)
+
+[node name="Down5Collider" type="RayCast3D" parent="."]
+target_position = Vector3(0, -50, 0)
