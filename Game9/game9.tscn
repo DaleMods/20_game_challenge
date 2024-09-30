@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=3 uid="uid://vvxgfkk6dege"]
+
+[ext_resource type="Script" path="res://Game9/game9.gd" id="1_88c36"]
+[ext_resource type="PackedScene" uid="uid://btqfi8enj1b8y" path="res://Game9/Systems/systems_manager.tscn" id="2_lssdt"]
+[ext_resource type="PackedScene" uid="uid://rnr4rnyielsu" path="res://Game9/Game/game_manager.tscn" id="4_uor4w"]
+[ext_resource type="PackedScene" uid="uid://eo8ij5y6u3hp" path="res://Game9/UI/ui_manager.tscn" id="4_ww5me"]
+
+[node name="Game9" type="Node"]
+script = ExtResource("1_88c36")
+
+[node name="SystemsManager" parent="." instance=ExtResource("2_lssdt")]
+
+[node name="UIManager" parent="." instance=ExtResource("4_ww5me")]
+
+[node name="GameManager" parent="." instance=ExtResource("4_uor4w")]

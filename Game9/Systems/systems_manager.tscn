@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://btqfi8enj1b8y"]
+
+[ext_resource type="Script" path="res://Game9/Systems/systems_manager.gd" id="1_edrpe"]
+[ext_resource type="Script" path="res://Game9/Systems/Options/options_manager.gd" id="2_77kyh"]
+[ext_resource type="Script" path="res://Game9/Systems/Input/input_manager.gd" id="2_plkd8"]
+[ext_resource type="Script" path="res://Game9/Systems/Audio/audio_manager.gd" id="3_hgl32"]
+
+[node name="SystemsManager" type="Node"]
+script = ExtResource("1_edrpe")
+
+[node name="InputManager" type="Node" parent="."]
+script = ExtResource("2_plkd8")
+
+[node name="OptionsManager" type="Node" parent="."]
+script = ExtResource("2_77kyh")
+
+[node name="AudioManager" type="Node" parent="."]
+script = ExtResource("3_hgl32")
+
+[node name="AudioStreams" type="Node" parent="AudioManager"]
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="AudioManager"]
