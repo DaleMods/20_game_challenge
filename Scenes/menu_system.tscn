@@ -105,8 +105,23 @@ theme_override_font_sizes/font_size = 16
 text = "Game 8
 Tie Fox!"
 
+[node name="Game9Button" type="Button" parent="VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_font_sizes/font_size = 16
+text = "Game 9
+Kart!"
+
+[node name="Game10Button" type="Button" parent="VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_font_sizes/font_size = 16
+text = "Game 10
+TBA!"
+
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-visible = false
 layout_mode = 0
 offset_top = 550.0
 offset_right = 800.0
@@ -125,4 +140,5 @@ text = "Exit to Desktop"
 [connection signal="pressed" from="VBoxContainer/HBoxContainer2/Game6Button" to="." method="_on_game_6_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer2/Game7Button" to="." method="_on_game_7_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer2/Game8Button" to="." method="_on_game_8_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Game9Button" to="." method="_on_game_9_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
