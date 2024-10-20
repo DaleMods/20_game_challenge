@@ -1,0 +1,28 @@
+[remap]
+
+importer="3d_texture"
+type="CompressedTexture3D"
+uid="uid://dkxjb6oh15umx"
+path.bptc="res://.godot/imported/worlnoise.bmp-15f3972cb76921b1b016d01d2a564c9e.bptc.ctex3d"
+path.astc="res://.godot/imported/worlnoise.bmp-15f3972cb76921b1b016d01d2a564c9e.astc.ctex3d"
+metadata={
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
+}
+
+[deps]
+
+source_file="res://Game10/Game/Sky/worlnoise.bmp"
+dest_files=["res://.godot/imported/worlnoise.bmp-15f3972cb76921b1b016d01d2a564c9e.bptc.ctex3d", "res://.godot/imported/worlnoise.bmp-15f3972cb76921b1b016d01d2a564c9e.astc.ctex3d"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=true
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+slices/horizontal=32
+slices/vertical=1
